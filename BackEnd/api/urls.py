@@ -1,6 +1,9 @@
 from django.urls import path
 from . import views
 from . import views
+
+
+
 from rest_framework_simplejwt.views import (
     TokenObtainPairView,
     TokenRefreshView,
@@ -51,8 +54,8 @@ urlpatterns = [
     path('sells/<int:pk>/', views.SellsDetail.as_view(), name='sells-detail'),
     
     #Sells_Detail
-    path(' selldetail/', views. Sell_DetailListCreate.as_view(), name='sell_Detail-list'),
-    path(' selldetail/<int:pk>/', views.Sell_DetailDetail.as_view(), name='sell_Detail-detail'),
+    path(' selldetail/', views. Sell_DetailListCreate.as_view(), name='sell_detail-list'),
+    path(' selldetail/<int:pk>/', views.Sell_Detail.as_view(), name='sell_detail'),
     
     #Record
     path('record/', views.RecordListCreate.as_view(), name='record-list'),
@@ -83,6 +86,27 @@ urlpatterns = [
     path('employees/<int:pk>/', views.EmployeesDetail.as_view(), name='employees-detail'),  
 
 
+    # Rutas para JWT 
+    path('token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),  # Para obtener token de acceso y refresco
+    path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),  # Para refrescar el token de acceso
+   #tabla auth para usuarios.
+    path('user/', views.UserListCreate.as_view(), name='user-list'), 
+    path('user/<int:pk>/', views.UserDetail.as_view(), name='user-detail'),
+   
+   
+    #Rutas para Consultas Especificas.
+    #URL vista producto categoria
+    path('product/category/<int:id_category>/', views.ProductosPorCategoria.as_view(), name='product_category'),
+   
+    #URL vista ventas asociadadas a un cliente en especifico.
+    path('client/sells/<int:id_client>/', views.VentasPorCliente.as_view(), name='client_purchases'),
 
+    # URL vista Reviews asociadas al mismo cliente  
+    path('reviews/client/<int:id_client>/', views.ReviewsPorCliente.as_view(), name='reviews_cliente'),
 
+    # Url vista Inventario por producto
+    path('inventory/product/<int:id_product>/', views.InventarioPorProducto.as_view(), name='inventory_product'),
+
+    # URL vista Empleado por Clasificacion 
+    path('employee/clasification/<int:id_employee_clasification>/', views.EmpleadosPorClasificacion.as_view(), name='employee_clasification'),
 ]

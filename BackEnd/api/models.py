@@ -9,22 +9,25 @@ from django.db import models
     def _str_(self):
         return str(self.nombre)
 """
+
 #Sub_Categoria de productos
 class Sub_Categories(models.Model):
     id_sub_category = models.AutoField(primary_key=True)
     sub_category_name = models.CharField(max_length=100, null= False)
-    sub_category_description = models.TextField(null= False)
     def __str__(self):
         return str(self.sub_category_name)
 
-#Listo
+
+#Categoria de productos
 class Categories(models.Model):
     id_category = models.AutoField(primary_key=True)
     category_name = models.CharField(max_length=100, null= False)
     category_description = models.TextField(null=False)
     id_sub_category = models.ForeignKey(Sub_Categories, on_delete=models.CASCADE)
+
     def __str__(self):
         return str(self.category_name)
+    
 
 #Listo
 class Supplier_Categories(models.Model):
@@ -169,10 +172,4 @@ class Employees(models.Model):
 
     def __str__(self):
         return str(self.name)
-
-
-
-
-
-
 
